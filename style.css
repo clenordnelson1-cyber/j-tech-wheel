@@ -31,8 +31,6 @@ h1{
     margin:auto;
 }
 #wheel {
-  width: 700px;
-  height: 700px;
   transition: transform 4s ease-out;
 }
 
