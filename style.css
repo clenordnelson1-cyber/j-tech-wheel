@@ -30,6 +30,11 @@ h1{
     height:700px;
     margin:auto;
 }
+#wheel {
+  width: 700px;
+  height: 700px;
+  transition: transform 4s ease-out;
+}
 
 canvas{
     width:700px;
