@@ -15,13 +15,13 @@ const prizes = [
 ];
 const colors = [
   "#c00000",
+  "#990000",
   "#c00000",
+  "#990000",
   "#c00000",
+  "#990000",
   "#c00000",
-  "#c00000",
-  "#c00000",
-  "#c00000",
-  "#c00000"
+  "#990000"
 ];
 
 const total = prizes.length;
@@ -43,6 +43,9 @@ function drawWheel() {
 
     ctx.fillStyle = colors[i];
     ctx.fill();
+    ctx.strokeStyle = "#ffffff";
+ctx.lineWidth = 4;
+ctx.stroke();
 
     ctx.save();
     ctx.translate(350, 350);
