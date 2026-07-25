@@ -43,6 +43,7 @@ function drawWheel() {
 
     ctx.fillStyle = colors[i];
     ctx.fill();
+
     ctx.strokeStyle = "#ffffff";
 ctx.lineWidth = 4;
 ctx.stroke();
