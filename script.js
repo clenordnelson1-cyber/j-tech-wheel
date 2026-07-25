@@ -13,7 +13,16 @@ const prizes = [
   "Lose",
   "1060 💎"
 ];
-const colors = Array(prizes.length).fill("#c00000");
+const colors = [
+  "#e53935",
+  "#1e88e5",
+  "#43a047",
+  "#fb8c00",
+  "#8e24aa",
+  "#00897b",
+  "#fdd835",
+  "#6d4c41"
+];
 
 const total = prizes.length;
 const arc = (2 * Math.PI) / total;
