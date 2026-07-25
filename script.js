@@ -9,10 +9,11 @@ const prizes = [
   "520 💎",
   "Lose",
   "Try Again",
-  "GiftCard Apple,
+  "Apple Apple5$",
   "Lose",
   "1060 💎"
 ];
+
 const colors = [
   "#c00000",
   "#990000",
@@ -31,7 +32,7 @@ let rotation = 0;
 let spinning = false;
 
 function drawWheel() {
-  ctx.clearRect(0, 0, canvas.width, canvas.heig
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < total; i++) {
     const angle = i * arc;
@@ -45,8 +46,8 @@ function drawWheel() {
     ctx.fill();
 
     ctx.strokeStyle = "#ffffff";
-ctx.lineWidth = 4;
-ctx.stroke();
+    ctx.lineWidth = 4;
+    ctx.stroke();
 
     ctx.save();
     ctx.translate(350, 350);
@@ -77,15 +78,15 @@ spinBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     const finalAngle = ((rotation % 360) + 360) % 360;
-const slice = 360 / total;
+    const slice = 360 / total;
 
-let index = Math.round((360 - finalAngle) / slice) % total;
+    let index = Math.round((360 - finalAngle) / slice) % total;
 
-if (index < 0) {
-  index += total;
-}
+    if (index < 0) {
+      index += total;
+    }
 
-result.textContent = "🎉 Result: " + prizes[index];
+    result.textContent = "🎉 Result: " + prizes[index];
 
     spinning = false;
     spinBtn.disabled = false;
