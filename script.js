@@ -4,14 +4,14 @@ const spinBtn = document.getElementById("spinBtn");
 const result = document.getElementById("result");
 
 const prizes = [
-  "100 💎",
-  "310 💎",
-  "520 💎",
+  "100 💎\n75 GDS",
+  "310 💎\n300 GDS",
+  "520 💎\n650 GDS",
   "Lose",
   "Try Again",
-  "Apple Apple5$",
+  "Apple Card $5\n700 GDS",
   "Lose",
-  "1060 💎"
+  "1060 💎\n1300 GDS"
 ];
 
 const colors = [
