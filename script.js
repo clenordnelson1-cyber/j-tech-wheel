@@ -4,25 +4,24 @@ const spinBtn = document.getElementById("spinBtn");
 const result = document.getElementById("result");
 
 const prizes = [
-  "10 Points",
-  "20 Points",
-  "50 Points",
-  "100 Points",
+  "100 💎",
+  "310 💎",
+  "520 💎",
+  "Lose",
   "Try Again",
-  "Gift",
-  "Bonus",
-  "Jackpot"
+  "GiftCard Apple,
+  "Lose",
+  "1060 💎"
 ];
-
-const colors = [
-  "#e53935",
-  "#1e88e5",
-  "#43a047",
-  "#fb8c00",
-  "#8e24aa",
-  "#00897b",
-  "#fdd835",
-  "#6d4c41"
+cconstt colors = [
+  "#c00000",
+  "#c00000",
+  "#c00000",
+  "#c00000",
+  "#c00000",
+  "#c00000",
+  "#c00000",
+  "#c00000"
 ];
 
 const total = prizes.length;
@@ -32,7 +31,7 @@ let rotation = 0;
 let spinning = false;
 
 function drawWheel() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.heig
 
   for (let i = 0; i < total; i++) {
     const angle = i * arc;
@@ -73,11 +72,16 @@ spinBtn.addEventListener("click", () => {
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
-    const finalAngle = rotation % 360;
-    const index =
-      Math.floor(((360 - finalAngle + 90) % 360) / (360 / total)) % total;
+    const finalAngle = ((rotation % 360) + 360) % 360;
+const slice = 360 / total;
 
-    result.textContent = "🎉 Result: " + prizes[index];
+let index = Math.round((360 - finalAngle) / slice) % total;
+
+if (index < 0) {
+  index += total;
+}
+
+result.textContent = "🎉 Result: " + prizes[index];
 
     spinning = false;
     spinBtn.disabled = false;
