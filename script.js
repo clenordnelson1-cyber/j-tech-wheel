@@ -105,20 +105,22 @@ spinBtn.addEventListener("click", () => {
 
   const slice = 360 / prizes.length;
 
-  // Sant seksyon gayan an anba flèch la
-  const target = winner * slice + slice / 2;
+// Mete sant seksyon an egzakteman anba flèch la
+const targetAngle = (winner + 0.5) * slice;
 
-  // Flèch la anlè (270°)
-  const stopAngle = 270 - target;
+// Ajiste pou flèch ki anlè
+const stopAngle = 360 - targetAngle;
 
-  rotation += 3600 + stopAngle;
+rotation += (360 * 10) + stopAngle;
 
   canvas.style.transition = "transform 5s ease-out";
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
 
-    const landed = prizes[winner].label;
+    const normalized = ((rotation % 360) + 360) % 360;
+const landedIndex = Math.floor(((360 - normalized) % 360) / slice);
+const landed = prizes[landedIndex].label;
 
     const win = selectedPrize === landed;
 
