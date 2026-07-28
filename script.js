@@ -114,31 +114,19 @@ spinBtn.addEventListener("click", () => {
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
+    
+const finalAngle = ((rotation % 360) + 360) % 360;
+const slice = 360 / prizes.length;
 
-    const landed = prizes[winner].label;
+let landedIndex = Math.floor(((360 - finalAngle) % 360) / slice);
 
-    let win = false;
+if (landedIndex < 0) landedIndex = 0;
+if (landedIndex >= prizes.length) landedIndex = prizes.length - 1;
 
-    if (selectedPrize === "100 💎" && landed === "100 💎") {
-      win = true;
-    }
+const landed = prizes[landedIndex].label;
 
-    if (selectedPrize === "310 💎" && landed === "310 💎") {
-      win = true;
-    }
-
-    if (selectedPrize === "520 💎" && landed === "520 💎") {
-      win = true;
-    }
-
-    if (selectedPrize === "Apple Card $5" && landed === "Apple Card $5") {
-      win = true;
-    }
-
-    if (selectedPrize === "1060 💎" && landed === "1060 💎") {
-      win = true;
-    }
-
+const win = selectedPrize === landed;
+    
     if (win) {
 
       result.innerHTML = `
