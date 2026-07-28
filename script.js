@@ -101,12 +101,15 @@ spinBtn.addEventListener("click", () => {
   spinBtn.disabled = true;
   result.innerHTML = "🎡 Woulet la ap vire...";
 
-  // Woulet la chwazi yon rezilta o aza
   const winner = Math.floor(Math.random() * prizes.length);
 
   const slice = 360 / prizes.length;
-  const targetAngle = winner * slice + slice / 2;
-  const stopAngle = 360 - targetAngle;
+
+  // Sant seksyon gayan an anba flèch la
+  const target = winner * slice + slice / 2;
+
+  // Flèch la anlè (270°)
+  const stopAngle = 270 - target;
 
   rotation += 3600 + stopAngle;
 
@@ -114,19 +117,11 @@ spinBtn.addEventListener("click", () => {
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
-    
-const finalAngle = ((rotation % 360) + 360) % 360;
-const slice = 360 / prizes.length;
 
-let landedIndex = Math.floor(((360 - finalAngle) % 360) / slice);
+    const landed = prizes[winner].label;
 
-if (landedIndex < 0) landedIndex = 0;
-if (landedIndex >= prizes.length) landedIndex = prizes.length - 1;
+    const win = selectedPrize === landed;
 
-const landed = prizes[landedIndex].label;
-
-const win = selectedPrize === landed;
-    
     if (win) {
 
       result.innerHTML = `
@@ -147,6 +142,6 @@ const win = selectedPrize === landed;
     spinning = false;
     spinBtn.disabled = false;
 
-  },5000);
+  }, 5000);
 
 });
