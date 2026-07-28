@@ -99,22 +99,13 @@ spinBtn.addEventListener("click", () => {
 
   spinning = true;
   spinBtn.disabled = true;
+  result.innerHTML = "🎡 Woulet la ap vire...";
 
-  const winner = prizes.findIndex(p => p.label === selectedPrize);
+  // Woulet la chwazi yon rezilta o aza
+  const winner = Math.floor(Math.random() * prizes.length);
 
-  if (winner === -1) {
-    alert("Pri ou chwazi a pa egziste.");
-    spinning = false;
-    spinBtn.disabled = false;
-    return;
-  }
-
-  const slice = 360 / total;
-
-  // Sant seksyon an
+  const slice = 360 / prizes.length;
   const targetAngle = winner * slice + slice / 2;
-
-  // Flèch la anlè
   const stopAngle = 360 - targetAngle;
 
   rotation += 3600 + stopAngle;
@@ -124,23 +115,50 @@ spinBtn.addEventListener("click", () => {
 
   setTimeout(() => {
 
-    const prize = prizes[winner];
+    const landed = prizes[winner].label;
 
-    if (prize.price !== "") {
+    let win = false;
+
+    if (selectedPrize === "100 💎" && landed === "100 💎") {
+      win = true;
+    }
+
+    if (selectedPrize === "310 💎" && landed === "310 💎") {
+      win = true;
+    }
+
+    if (selectedPrize === "520 💎" && landed === "520 💎") {
+      win = true;
+    }
+
+    if (selectedPrize === "Apple Card $5" && landed === "Apple Card $5") {
+      win = true;
+    }
+
+    if (selectedPrize === "1060 💎" && landed === "1060 💎") {
+      win = true;
+    }
+
+    if (win) {
+
       result.innerHTML = `
-        <h2>🎉 Ou genyen</h2>
-        <h3>${prize.label}</h3>
-        <h2>💰 ${prize.price}</h2>
+      <h2 style="color:#00ff00;">🎉 OU GENYEN!</h2>
+      <h3>${landed}</h3>
+      <p>Felisitasyon!</p>
       `;
+
     } else {
+
       result.innerHTML = `
-        <h2>${prize.label}</h2>
+      <h2 style="color:#ff0000;">❌ OU PÈDI</h2>
+      <h3>Woulet la tonbe sou : ${landed}</h3>
       `;
+
     }
 
     spinning = false;
     spinBtn.disabled = false;
 
-  }, 5000);
+  },5000);
 
 });
