@@ -89,7 +89,6 @@ function drawWheel() {
 drawWheel();
 
 spinBtn.addEventListener("click", () => {
-
   if (spinning) return;
 
   if (!selectedPrize) {
@@ -102,48 +101,35 @@ spinBtn.addEventListener("click", () => {
   result.innerHTML = "🎡 Woulet la ap vire...";
 
   const winner = Math.floor(Math.random() * prizes.length);
-
   const slice = 360 / prizes.length;
 
-// Mete sant seksyon an egzakteman anba flèch la
-const targetAngle = (winner + 0.5) * slice;
+  const currentRotation = ((rotation % 360) + 360) % 360;
+  const desiredRotation = (winner * slice) % 360;
+  const delta = (desiredRotation - currentRotation + 360) % 360;
 
-// Ajiste pou flèch ki anlè
-const stopAngle = 360 - targetAngle;
-
-rotation += (360 * 10) + stopAngle;
+  rotation += 3600 + delta;
 
   canvas.style.transition = "transform 5s ease-out";
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
-
-    const normalized = ((rotation % 360) + 360) % 360;
-const landedIndex = Math.floor(((360 - normalized) % 360) / slice);
-const landed = prizes[landedIndex].label;
-
+    const landed = prizes[winner].label;
     const win = selectedPrize === landed;
 
     if (win) {
-
       result.innerHTML = `
-      <h2 style="color:#00ff00;">🎉 OU GENYEN!</h2>
-      <h3>${landed}</h3>
-      <p>Felisitasyon!</p>
+        <h2 style="color:#00ff00;">🎉 OU GENYEN!</h2>
+        <h3>${landed}</h3>
+        <p>Felisitasyon!</p>
       `;
-
     } else {
-
       result.innerHTML = `
-      <h2 style="color:#ff0000;">❌ OU PÈDI</h2>
-      <h3>Woulet la tonbe sou : ${landed}</h3>
+        <h2 style="color:#ff0000;">❌ OU PÈDI</h2>
+        <h3>Woulet la tonbe sou : ${landed}</h3>
       `;
-
     }
 
     spinning = false;
     spinBtn.disabled = false;
-
   }, 5000);
-
 });
