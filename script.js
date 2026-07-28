@@ -4,14 +4,14 @@ const spinBtn = document.getElementById("spinBtn");
 const result = document.getElementById("result");
 
 const prizes = [
-  "100 💎\n75 GDS",
-  "310 💎\n300 GDS",
-  "520 💎\n650 GDS",
-  "Lose",
-  "Try Again",
-  "Apple Card $5\n700 GDS",
-  "Lose",
-  "1060 💎\n1300 GDS"
+  { label: "100 💎", price: "75 GDS" },
+  { label: "310 💎", price: "300 GDS" },
+  { label: "520 💎", price: "650 GDS" },
+  { label: "Lose", price: "" },
+  { label: "Try Again", price: "" },
+  { label: "Apple Card $5", price: "700 GDS" },
+  { label: "Lose", price: "" },
+  { label: "1060 💎", price: "1300 GDS" }
 ];
 
 const colors = [
@@ -35,6 +35,7 @@ function drawWheel() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < total; i++) {
+
     const angle = i * arc;
 
     ctx.beginPath();
@@ -50,13 +51,15 @@ function drawWheel() {
     ctx.stroke();
 
     ctx.save();
+
     ctx.translate(350, 350);
     ctx.rotate(angle + arc / 2);
 
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 22px Arial";
     ctx.textAlign = "right";
-    ctx.fillText(prizes[i], 300, 8);
+
+    ctx.fillText(prizes[i].label, 300, 8);
 
     ctx.restore();
   }
@@ -71,24 +74,35 @@ spinBtn.addEventListener("click", () => {
   spinBtn.disabled = true;
   result.textContent = "Spinning...";
 
-  const extra = Math.floor(Math.random() * 360);
-  rotation += 3600 + extra;
+  // Chwazi gayan an avan
+  const winner = Math.floor(Math.random() * total);
 
+  // Chak seksyon = 45°
+  const slice = 360 / total;
+
+  // Flèch la anlè (270°)
+  const stopAngle = 360 - (winner * slice + slice / 2);
+
+  // Fè anpil tou avan li kanpe
+  rotation += 360 * 10 + stopAngle;
+
+  canvas.style.transition = "transform 5s ease-out";
   canvas.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
-    const finalAngle = ((rotation % 360) + 360) % 360;
-    const slice = 360 / total;
 
-    let index = Math.round((360 - finalAngle) / slice) % total;
+    const prize = prizes[winner];
 
-    if (index < 0) {
-      index += total;
+    if (prize.price !== "") {
+      result.innerHTML =
+        `🎉 <b>${prize.label}</b><br>💰 Prix : <b>${prize.price}</b>`;
+    } else {
+      result.innerHTML =
+        `🎉 <b>${prize.label}</b>`;
     }
-
-    result.textContent = "🎉 Result: " + prizes[index];
 
     spinning = false;
     spinBtn.disabled = false;
+
   }, 5000);
 });
