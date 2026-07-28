@@ -104,8 +104,12 @@ spinBtn.addEventListener("click", () => {
   const slice = 360 / prizes.length;
 
   const currentRotation = ((rotation % 360) + 360) % 360;
-  const desiredRotation = (winner * slice) % 360;
-  const delta = (desiredRotation - currentRotation + 360) % 360;
+  const desiredRotation = 270 - ((winner + 0.5) * slice);
+  let delta = desiredRotation - currentRotation;
+
+if (delta < 0) {
+    delta += 360;
+  }
 
   rotation += 3600 + delta;
 
