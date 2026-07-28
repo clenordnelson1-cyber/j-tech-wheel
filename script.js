@@ -54,7 +54,7 @@ function drawWheel() {
 
   for(let i=0;i<total;i++){
 
-    const angle=i*arc;
+    const angle = i * arc - Math.PI / 2;
 
     ctx.beginPath();
     ctx.moveTo(350,350);
